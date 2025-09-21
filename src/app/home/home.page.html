@@ -1,20 +1,33 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
+<ion-header>
+  <ion-toolbar color="primero"> <!--El color primero se crea en varliables.scss-->
+    <ion-title>Galería Fotos</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding" color="segundo">
+  
+  <ion-grid>
+    <ion-row>
+      <!--Iteramos dentro del array fotos para asignarno a cada tarjeta -->
+      <ion-col size="6" *ngFor="let foto of fotosService.fotos; let i = index">
+        <ion-card color="light">
+          <img [src]="foto.webviewPath" alt="Foto guardada" />
+          <ion-card-content>
+            <!--Cuando se da clic en el boton enviamos los argumentos que necesita el metodo-->
+            <ion-button color="primero" class="btnEliminar" expand="block" (click)="eliminar(foto, i)">
+              Eliminar foto
+            </ion-button>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+  <!--Boton flotante que llama al metodo tomar foto-->
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button color="primero" (click)="tomarFoto()">
+      <ion-icon color="light" name="camera"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>
+
